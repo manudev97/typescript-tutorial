@@ -1,5 +1,32 @@
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
-import { aeneid } from '@story-protocol/core-sdk'
+import { defineChain } from 'viem'
+
+// Define Story Aeneid Testnet
+export const storyAeneid = defineChain({
+    id: 1315,
+    name: 'Story Aeneid Testnet',
+    network: 'story-aeneid',
+    nativeCurrency: {
+        decimals: 18,
+        name: 'STORY',
+        symbol: 'STORY',
+    },
+    rpcUrls: {
+        default: { 
+            http: ['https://aeneid.storyrpc.io']
+        },
+        public: {
+            http: ['https://aeneid.storyrpc.io']
+        },
+    },
+    blockExplorers: {
+        default: {
+            name: 'Blockscout',
+            url: 'https://aeneid.storyscan.io',
+        },
+    },
+    testnet: true,
+})
 
 const projectId = 'YOUR_WALLET_CONNECT_PROJECT_ID'
 
@@ -11,7 +38,7 @@ const metadata = {
 }
 
 export const config = defaultWagmiConfig({
-    chains: [aeneid], // Using Story Protocol's Aeneid testnet
+    chains: [storyAeneid],
     projectId,
     metadata,
     enableWalletConnect: true,
